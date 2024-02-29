@@ -19,7 +19,10 @@ class AdminAuthenticate
         // dd(Auth::guard('admin')->user()->role->name);
         if(Auth::guard('admin')->check() && Auth::guard('admin')->user()->role->name == 'Admin'){
             return $next($request);
-           }else{
+           }elseif(Auth::guard('admin')->check() && Auth::guard('admin')->user()->role->name == 'SuperAdmin'){
+            return $next($request);
+           }
+           else{
             return redirect()->route('login');
            }
     }
